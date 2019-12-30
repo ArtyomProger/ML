@@ -72,7 +72,6 @@ export class Transaction extends React.Component {
                 <td>{ transaction.status }</td>
                 <td>{ transaction.risk_level }</td>
               </tr>
-              // <h3 key="transaction.did">{transaction.did}</h3>
             ))}
             {/* <tr>
               <td data-label="ID">1</td>
