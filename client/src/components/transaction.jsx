@@ -4,24 +4,77 @@ import './transaction.css';
 // import { routes } from '../routes';
 
 export class Transaction extends React.Component {
-    render () {
-        return (
-            <div className="table">
-                <h3>Транзакции</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Тип операции</th>
-                    <th>Размер операции</th>
-                    <th>ИНН отправителя</th>
-                    <th>ИНН получателя</th>
-                    <th>Статус</th>
-                    <th>Уровень риска</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
+  constructor() {
+    super();
+    this.state = {
+      transactions: [],
+    };
+  }
+
+  componentDidMount() {
+    let that = this;
+    fetch('http://localhost:8080/test_db')
+    .then((res)=>{
+        res.json()
+          .then((data)=>{
+            that.setState({
+              transactions: data
+            });
+          });
+      });
+  };
+
+  // getinfo() {
+  //   let request = new Request("http://localhost:8080/test_db", {
+  //     method: 'GET',
+  //     headers: new Headers({ 'Content-Type': 'application/json' })
+  //     // body: JSON.stringify(data)
+  //   });
+
+  //   // xmlhttprequest()
+
+  //   fetch(request)
+  //     .then((res)=>{
+  //       res.json()
+  //         .then((data)=>{
+  //           console.log(data);
+  //         });
+  //     })
+  //     .catch((err)=> {
+  //       console.log(err);
+  //     });
+  // };
+
+  render () {
+    return (
+      <div className="table">
+        <h3>Транзакции</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Тип операции</th>
+              <th>Размер операции</th>
+              <th>ИНН отправителя</th>
+              <th>ИНН получателя</th>
+              <th>Статус</th>
+              <th>Уровень риска</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.transactions.map(transaction => (
+              <tr key="transaction.did">
+                <td>{ transaction.did }</td>
+                <td>{ transaction.operation_type }</td>
+                <td>{ transaction.operation_size }</td>
+                <td>{ transaction.sender_inn }</td>
+                <td>{ transaction.recipient_inn }</td>
+                <td>{ transaction.status }</td>
+                <td>{ transaction.risk_level }</td>
+              </tr>
+              // <h3 key="transaction.did">{transaction.did}</h3>
+            ))}
+            {/* <tr>
               <td data-label="ID">1</td>
               <td data-label="TransactionType">Покупка квартиры</td>
               <td data-label="Volume">340500</td>
@@ -164,12 +217,10 @@ export class Transaction extends React.Component {
               <td data-label="INNRecepient">3002300732259</td>
               <td data-label="Status">Заблокирована</td>
               <td data-label="RiskLevel">Высокий</td>
-            </tr>
-            
-
-                </tbody>
-            </table>
-            </div>
-        );
-    }
+            </tr> */}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
