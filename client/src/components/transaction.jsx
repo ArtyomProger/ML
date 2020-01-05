@@ -12,12 +12,11 @@ export class Transaction extends React.Component {
   }
 
   componentDidMount() {
-    let that = this;
     fetch('http://localhost:8080/test_db')
-    .then((res)=>{
+      .then((res)=>{
         res.json()
           .then((data)=>{
-            that.setState({
+            this.setState({
               transactions: data
             });
           });
@@ -62,9 +61,9 @@ export class Transaction extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.transactions.map(transaction => (
-              <tr key="transaction.did">
-                <td>{ transaction.did }</td>
+            {this.state.transactions.map((transaction, index) => (
+              <tr key={index}>
+                <td>{ index+1 }</td>
                 <td>{ transaction.operation_type }</td>
                 <td>{ transaction.operation_size }</td>
                 <td>{ transaction.sender_inn }</td>

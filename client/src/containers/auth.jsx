@@ -60,7 +60,7 @@ export const Auth = () => {
             <div id="wrapper-close">
               <a href="/">
                 {' '}
-                <img src={'assets/Close.png'} alt=""></img>
+                <img src={require('assets/Close.png')} alt=""></img>
               </a>
             </div>
           </div>

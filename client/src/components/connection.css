@@ -29,3 +29,36 @@
     width: 110px;
     cursor: pointer;
 }
+
+.schemaModal_wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.schemaModal_wrapper > *:not(:first-child) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+}
+
+.schemaModal_close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.schemaModal_close img {
+    width: 70px;
+    height: 70px;
+    transform: rotate(4deg);
+}
