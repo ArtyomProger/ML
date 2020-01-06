@@ -28,12 +28,16 @@ p {
 }
 
 .tasksEl_modal_btn {
+    border: none;
+    display: block;
     background: #F56666;
+    color: #fffefe;
     border-radius: 5px;
     margin: 20px auto 0 auto;
     padding: 10px;
     width: 150px;
     text-align: center;
+    cursor: pointer;
 }
 
 .tasksEl_title {
@@ -76,7 +80,6 @@ p {
     padding: 50px 40px;
     background: #286E9F;
     border-radius: 15px;
-    cursor: pointer;
 }
 
 .tasksEl_modal_name {
@@ -128,17 +131,35 @@ p {
 }
 
 .tasksEl_modal_marks>*>p:not(:first-child) {
-    display: inline-block;
     padding: 5px;
     border-radius: 8px;
 }
 
-.tasksEl_modal_marks>*:first-child>p:not(:first-child) {
-    background-color: #C4C4C4;
+.tasksEl_modal_marks .taskEl_modal_addTag p {
+    background-color: #C57575;
+    border-radius: 8px;
 }
 
-.tasksEl_modal_marks>*:last-child>p:not(:first-child) {
-    background-color: #C57575;
+.taskEl_modal_addTag {
+    display: flex;
+    align-items: flex-start;
+}
+
+.taskEl_modal_tagList {
+    position: relative;
+}
+
+.taskEl_modal_tagList p {
+    padding: 5px 10px;
+}
+
+.taskEl_modal_tagList img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
 }
 
 .tasksEl_modal_marks_add {
@@ -151,4 +172,18 @@ p {
     margin-top: 10px;
     border: none;
     padding: 5px;
+}
+
+.taskEl_modal_addTagInput {
+    display: flex;
+    align-items: center;
+}
+
+.taskEl_modal_addTagInput input {
+    margin: 0;
+    margin-right: 5px;
+}
+
+.taskEl_modal_addTagInput img {
+    cursor: pointer;
 }
