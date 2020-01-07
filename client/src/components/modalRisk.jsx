@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import './modalRisk.css';
 import { ModalAddParams } from './modalAddParams';
+import { WeightCoefModal } from './weightCoefModal';
 
 export const ModalRisk = (props) => {
-    const [isModalVisible, visibleChanger] = useState(false);
+    const [isModal1Visible, visibleChanger] = useState(false);
+    const [isModal2Visible, visibleChanger2] = useState(false);
     return (
       <div className="modalRisk_wrapper">
-        {isModalVisible && <ModalAddParams visibleChanger={visibleChanger} />}
+        {isModal1Visible && <ModalAddParams visibleChanger={visibleChanger} />}
+        {isModal2Visible && <WeightCoefModal visibleChanger={visibleChanger2} />}
         <h3>Оценка присущего риска</h3>
         <div className="modalRisk_row">
           <div
@@ -17,7 +20,10 @@ export const ModalRisk = (props) => {
           >
             Клиенты
           </div>
-          <div className="modalRisk_row_el">Весовой коэффициент</div>
+          <div className="modalRisk_row_el"
+          onClick={()=>{
+            visibleChanger2(true);
+          }}>Весовой коэффициент</div>
         </div>
         <div className="modalRisk_row">
           <div
@@ -28,7 +34,10 @@ export const ModalRisk = (props) => {
           >
             Продукты и услуги
           </div>
-          <div className="modalRisk_row_el">Весовой коэффициент</div>
+          <div className="modalRisk_row_el"
+          onClick={()=>{
+            visibleChanger2(true);
+          }}>Весовой коэффициент</div>
         </div>
         <div className="modalRisk_row">
           <div
@@ -39,7 +48,10 @@ export const ModalRisk = (props) => {
           >
             Страны
           </div>
-          <div className="modalRisk_row_el">Весовой коэффициент</div>
+          <div className="modalRisk_row_el"
+          onClick={()=>{
+            visibleChanger2(true);
+          }}>Весовой коэффициент</div>
         </div>
         <div className="modalRisk_row">
           <div
@@ -50,7 +62,10 @@ export const ModalRisk = (props) => {
           >
             Каналы
           </div>
-          <div className="modalRisk_row_el">Весовой коэффициент</div>
+          <div className="modalRisk_row_el"
+          onClick={()=>{
+            visibleChanger2(true);
+          }}>Весовой коэффициент</div>
         </div>
         <div className="modalRisk_row">
           <div
@@ -61,7 +76,10 @@ export const ModalRisk = (props) => {
           >
             Прочее
           </div>
-          <div className="modalRisk_row_el">Весовой коэффициент</div>
+          <div className="modalRisk_row_el"
+          onClick={()=>{
+            visibleChanger2(true);
+          }}>Весовой коэффициент</div>
         </div>
         <div
           className="modalRisk_btn"

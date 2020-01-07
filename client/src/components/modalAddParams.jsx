@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./modalAddParams.css";
+import { AddCoefModal } from './addCoefModal';
 
 export const ModalAddParams = (props) => {
+  const [factorModalvisible, changeFactorVisible] = useState(false);
   return (
     <div className="modalAddParams_wrapper">
+      {factorModalvisible && <AddCoefModal changeFactorVisible={changeFactorVisible} />}
       <h3>Оценка клиентской базы</h3>
       <div className="modalAddParams_close" onClick={() => {
           props.visibleChanger();
@@ -13,7 +16,10 @@ export const ModalAddParams = (props) => {
       <div className="modalAddParams_content">
           {[1,2,3,4,5,6].map((el)=> <ModalAddParamsEl key={el}/>)}
       </div>
-      <div className="modalAddParams_btn">Добавить фактор</div>
+      <div className="modalAddParams_btn"
+      onClick={()=>{
+        changeFactorVisible(true);
+      }}>Добавить фактор</div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import './tasksEl.css';
 
 export class TasksEl extends React.Component {
@@ -7,8 +7,8 @@ export class TasksEl extends React.Component {
         this.state = {
             items: [],
             text: '',
-            members: 'Денис',
-            marks: 'Срочно',
+            members: [],
+            marks: [],
             isModalVisible: false,
             isMarker1Visible: false,
             isMarker2Visible: false,
@@ -18,6 +18,7 @@ export class TasksEl extends React.Component {
         this.titleColor = {
             backgroundColor: this.props.bgcolor,
         };
+        this.tagInput1 = createRef();
     }
 
     render() {
@@ -34,7 +35,7 @@ export class TasksEl extends React.Component {
                                 })
                             }
                         }}>
-                        <form className="tasksEl_modal" onSubmit={this.handleSubmit}>
+                        <form method="post" action="./" className="tasksEl_modal" onSubmit={this.handleSubmit}>
                             <div className="tasksEl_modal_close"
                                 onClick={() => {
                                     this.setState(() => {
@@ -49,34 +50,80 @@ export class TasksEl extends React.Component {
                                 placeholder='Заголовок задачи' />
                             <div className="tasksEl_modal_marks">
                                 <div>
-                                    <p>Участники</p>
-                                    <p>{this.state.members}</p>
-                                    <div className="tasksEl_modal_marks_add"
-                                        onClick={() => {
-                                            this.setState(() => {
-                                                return {
-                                                    isMarker1Visible: true
-                                                }
-                                            })
-                                        }}>
-                                        <img src={require('../assets/plus.png')} alt="" />
+                                    <div>
+                                        <p>Участники</p>
                                     </div>
-                                    {this.state.isMarker1Visible && <input />}
+                                    <div className="taskEl_modal_addTag">
+                                        {this.state.members.length > 0
+                                            ? <div className="taskEl_modal_tagList">
+                                                {this.state.members.map((e, i)=>
+                                                    <div key={i} style={{ position: 'relative' }}>
+                                                        <p >{e}</p>
+                                                        <img src={require('../assets/plus_cross.png')} alt="" />
+                                                    </div>)}
+                                                <img src={require('../assets/plus_cross.png')} alt="" />
+                                            </div>
+                                            : <></>}
+                                        <div className="tasksEl_modal_marks_add"
+                                            onClick={() => {
+                                                this.setState(() => {
+                                                    return {
+                                                        isMarker1Visible: true
+                                                    }
+                                                })
+                                            }}>
+                                            <img src={require('../assets/plus.png')} alt="" />
+                                        </div>
+                                    </div>
+                                    {this.state.isMarker1Visible && 
+                                    <div className="taskEl_modal_addTagInput">
+                                        <input ref={(el) => {this.tagInput1 = el}}/>
+                                        <img src={require('../assets/plus.png')} alt="" 
+                                        onClick={()=>{
+                                            if (this.tagInput1.value === "") return;
+                                            let lastState = this.state.members;
+                                            lastState.push(this.tagInput1.value);
+                                            this.setState({members: lastState});
+                                        }}/>
+                                    </div>}
                                 </div>
                                 <div>
-                                    <p>Метки</p>
-                                    <p>{this.state.marks}</p>
-                                    <div className="tasksEl_modal_marks_add"
-                                        onClick={() => {
-                                            this.setState(() => {
-                                                return {
-                                                    isMarker2Visible: true
-                                                }
-                                            })
-                                        }}>
-                                        <img src={require('../assets/plus.png')} alt="" />
+                                    <div>
+                                        <p>Метки</p>
                                     </div>
-                                    {this.state.isMarker2Visible && <input />}
+                                    <div className="taskEl_modal_addTag">
+                                        {this.state.marks.length > 0
+                                            ? <div className="taskEl_modal_tagList">
+                                            {this.state.marks.map((e, i) => 
+                                            <div key={i} style={{position: 'relative'}}>
+                                                <p>{e}</p>
+                                                <img src={require('../assets/plus_cross.png')} alt="" />
+                                            </div>)}
+                                                
+                                            </div>
+                                            : <></>}
+                                        <div className="tasksEl_modal_marks_add"
+                                            onClick={() => {
+                                                this.setState(() => {
+                                                    return {
+                                                        isMarker2Visible: true
+                                                    }
+                                                })
+                                            }}>
+                                            <img src={require('../assets/plus.png')} alt="" />
+                                        </div>
+                                    </div>
+                                    {this.state.isMarker2Visible && 
+                                    <div className="taskEl_modal_addTagInput">
+                                        <input ref={(el) => { this.tagInput2 = el }}/>
+                                        <img src={require('../assets/plus.png')} alt="" 
+                                        onClick={()=>{
+                                            if (this.tagInput2.value === "") return;
+                                            let lastState = this.state.marks;
+                                            lastState.push(this.tagInput2.value);
+                                            this.setState({marks: lastState});
+                                        }}/>
+                                    </div>}
                                 </div>
                             </div>
 
@@ -88,7 +135,7 @@ export class TasksEl extends React.Component {
                                 <p>Действия</p>
                                 <textarea id="tasksEl_modal_desc_2"></textarea>
                             </label>
-                            <div className="tasksEl_modal_btn">Сохранить</div>
+                            <input type="submit" className="tasksEl_modal_btn" value="Сохранить"/>
                         </form>
                     </div>
                 )}
@@ -115,6 +162,8 @@ export class TasksEl extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        // TODO:
+        // Make new body of function
         if (!this.state.text.length) {
             return;
         }
